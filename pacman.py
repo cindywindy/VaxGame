@@ -1,6 +1,6 @@
 #Pacman in Python with PyGame
 #https://github.com/hbokmann/Pacman
-  
+#test
 #the ._view wasn't working
 import pygame
   
