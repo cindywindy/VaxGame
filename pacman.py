@@ -366,7 +366,7 @@ font = pygame.font.Font("freesansbold.ttf", 24)
 w = 303-16 #Width
 p_h = (7*60)+19 #Pacman height
 m_h = (4*60)+19 #Monster height
-b_h = (3*60)+19 #Binky height
+b_h = (3*60)+19 #Blinky height
 i_w = 303-16-32 #Inky width
 c_w = 303+(32-16) #Clyde width
 
@@ -396,6 +396,9 @@ def startGame():
 
   c_turn = 0
   c_steps = 0
+
+  k_turn = 0
+  k_steps = 0
 
 
   # Create the player paddle object
@@ -509,11 +512,12 @@ def startGame():
       Clyde.changespeed(Clyde_directions,"clyde",c_turn,c_steps,cl)
       Clyde.update(wall_list,False)
 
-      returned = Clyde2.changespeed(Clyde_directions,"clyde",c_turn,c_steps,cl)
-      c_turn = returned[0]
-      c_steps = returned[1]
-      Clyde2.changespeed(Clyde_directions,"clyde",c_turn,c_steps,cl)
-      Clyde2.update(wall_list,False)
+      if pygame.time.get_ticks() >= 3000:
+        returned = Clyde2.changespeed(Inky_directions,False,i_turn,i_steps,il)
+        k_turn = returned[0]
+        k_steps = returned[1]
+        Clyde2.changespeed(Inky_directions,False,i_turn,i_steps,il)
+        Clyde2.update(wall_list,False)
 
       # See if the Pacman block has collided with anything.
       blocks_hit_list = pygame.sprite.spritecollide(Pacman, block_list, True)
